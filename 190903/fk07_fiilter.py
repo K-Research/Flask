@@ -1,6 +1,8 @@
 from flask import Flask, render_template
 
-app = Flask('/user/<name>')
+app = Flask(__name__)
+
+@app.route('/user/<name>')
 def user(name):
     return render_template('user2.html', name = name)
 
