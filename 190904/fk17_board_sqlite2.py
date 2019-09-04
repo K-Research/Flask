@@ -14,7 +14,7 @@ def run():
     c = conn.cursor()
     c.execute("SELECT * FROM general")
     rows = c.fetchall()
-    return render_template("board_index2.html", rows = rows)
+    return render_template("board_index.html", rows = rows)
 
 @app.route("/modi")
 def modi():
@@ -23,7 +23,7 @@ def modi():
     c = conn.cursor()
     c.execute("SELECT * FROM general where id = "+str(id))
     rows = c.fetchall()
-    return render_template("board_modi2.html", rows = rows)
+    return render_template("board_modi.html", rows = rows)
 
 @app.route("/addred", methods = ["POST", "GET"])
 def addrec():
@@ -47,7 +47,7 @@ def addrec():
             msg="입력과정에서 에러가 발생했습니다."
 
         finally:
-            return render_template("board_result2.html",msg = msg)
+            return render_template("board_result.html",msg = msg)
             con.close()
 
 app.run(host="127.0.0.1",port=5000,debug=False)
