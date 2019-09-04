@@ -28,21 +28,22 @@ def modi():
     rows = c.fetchall();
     return render_template("board_modi.html", rows = rows)
 
-@app.route('/addrec', methods = ['POST', 'GET'])
+@app.route("/addrec", methods = ["POST", "GET"])
 def addrec():
     if request.method == 'POST':
         try:
-            war = request.form('war')
-            id = request.form('id')
-            with sqlist3.connect("D:/Bitcamp/Flask/190904/wanggun.db") as con:
+            war = request.form['war']
+            id = request.form['id']
+            with sqlite3.connect("D:/Bitcamp/Flask/190904/wanggun.db") as con:
                 cur = con.cursor()
-                cur.execute("update general set war = " + str(war) + "where id = " + str(id))
+                cur.execute("UPDATE general SET war = " + str(war) + " WHERE id = " + str(id))
                 con.commit()
-                msg = "정상적으로 입력되었습니다."
+                msg = "정상적으로 입력되었습니다"
+
         except:
             con.rollback()
             msg = "입력과정에서 에러가 발생했습니다."
-        
+
         finally:
             return render_template("board_result.html", msg = msg)
             con.close()
